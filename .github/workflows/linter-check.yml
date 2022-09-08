@@ -1,0 +1,40 @@
+name: linter-check
+
+# Trigger the workflow on push or pull request
+on: push
+
+jobs:
+  check:
+    # The type of machine to run the job on
+    runs-on: ubuntu-latest
+    
+    strategy:
+      # Node versions list
+      matrix:
+        node-version: [16.x]
+
+    steps:
+        # Клонируем репозиторий
+      - uses: actions/checkout@v2
+        # Step's name
+      - name: Use Node.js ${{ matrix.node-version }}
+        # Устанавливаем Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        # Ставим зависимости
+        run:  make install
+      - name: Run linter
+        # Запускаем линтер
+        run: make lint
+      - name: Test & publish code coverage
+        # Publish code coverage on Code Climate
+        # https://github.com/paambaati/codeclimate-action
+        uses: paambaati/codeclimate-action@v2.7.4
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.VISKUZI_SECRET }}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
