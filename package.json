@@ -8,7 +8,7 @@
     "url": "git+https://github.com/viskuzi/frontend-project-11.git"
   },
   "scripts": {
-   "lint": "make lint"
+    "lint": "make lint"
   },
   "dependencies": {
     "lodash": "^4.17.21"
@@ -17,5 +17,12 @@
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0"
-  }
+  },
+  "description": "[![Actions Status](https://github.com/viskuzi/frontend-project-11/workflows/hexlet-check/badge.svg)](https://github.com/viskuzi/frontend-project-11/actions)",
+  "bugs": {
+    "url": "https://github.com/viskuzi/frontend-project-11/issues"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
