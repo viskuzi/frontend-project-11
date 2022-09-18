@@ -2,12 +2,8 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
-// eslint-disable-next-line eqeqeq
-const isProduction = process.env.NODE_ENV == 'production';
-
-const config = {
+module.exports = {
   entry: './src/js/main.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -19,6 +15,7 @@ const config = {
     host: 'localhost',
     hot: true,
   },
+  mode: process.env.NODE_ENV || 'development',
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
@@ -63,14 +60,4 @@ const config = {
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
-};
-
-module.exports = () => {
-  if (isProduction) {
-    config.mode = 'production';
-    config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
-  } else {
-    config.mode = 'development';
-  }
-  return config;
 };
